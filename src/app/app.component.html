@@ -16,14 +16,22 @@
           </li>
         </div>
 
-        <div *ngIf="!onlyOdd">
-            <li
-              class="list-group-item"
-              [ngClass]="{evenClass: even % 2 === 0 }"
-              *ngFor="let even of evenNumbers">
-              {{even}}
-            </li>
-          </div>
+        <!--<div *ngIf="!onlyOdd">-->
+            <!--<li-->
+              <!--class="list-group-item"-->
+              <!--[ngClass]="{evenClass: even % 2 === 0 }"-->
+              <!--*ngFor="let even of evenNumbers">-->
+              <!--{{even}}-->
+            <!--</li>-->
+          <!--</div>-->
+        <div *appUnless="onlyOdd">
+          <li
+            class="list-group-item"
+            [ngClass]="{evenClass: even % 2 === 0 }"
+            *ngFor="let even of evenNumbers">
+            {{even}}
+          </li>
+        </div>
       </ul>
 
       <ng-template [ngIf]="onlyOdd">
