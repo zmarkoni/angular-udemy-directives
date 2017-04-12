@@ -1,9 +1,11 @@
-import {Directive, ElementRef, Renderer2, OnInit, HostListener} from '@angular/core';
+import {Directive, ElementRef, Renderer2, OnInit, HostListener, HostBinding} from '@angular/core';
 
 @Directive({
   selector: '[appBetterHighlight]'
 })
 export class BetterHighlightDirective implements OnInit{
+
+  @HostBinding('style.color') textColor: string = 'black'
 
   constructor(private elementRef: ElementRef, private renderer: Renderer2) { }
 
@@ -22,6 +24,9 @@ export class BetterHighlightDirective implements OnInit{
 
   @HostListener('mouseenter') mouseOver(eventData: Event) {
       this.elementRef.nativeElement.style.backgroundColor = 'green';
+      this.textColor = 'white'; // Here I am using @HostBinding('style.color')
+      // Which can be used only in this module in TS and it is bind to some property, in this
+      // case to style.color
   }
 
   @HostListener('mouseleave') mouseLeave(eventData: Event) {
