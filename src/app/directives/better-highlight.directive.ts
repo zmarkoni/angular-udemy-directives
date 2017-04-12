@@ -1,15 +1,19 @@
-import {Directive, ElementRef, Renderer2, OnInit, HostListener, HostBinding} from '@angular/core';
+import {Directive, ElementRef, Renderer2, OnInit, HostListener, HostBinding, Input} from '@angular/core';
 
 @Directive({
   selector: '[appBetterHighlight]'
 })
 export class BetterHighlightDirective implements OnInit{
+  // dynamic properties
+  @Input() defaultColor: string = 'transparent';
+  @Input() highlightColor: string = 'blue';
 
-  @HostBinding('style.color') textColor: string = 'black'
+  @HostBinding('style.backgroundColor') bgColor: string;
 
   constructor(private elementRef: ElementRef, private renderer: Renderer2) { }
 
   ngOnInit() {
+    this.bgColor = this.defaultColor;
     // this.renderer.setStyle(this.elementRef.nativeElement, 'background-color', 'blue');
   }
 
@@ -23,14 +27,15 @@ export class BetterHighlightDirective implements OnInit{
    */
 
   @HostListener('mouseenter') mouseOver(eventData: Event) {
-      this.elementRef.nativeElement.style.backgroundColor = 'green';
-      this.textColor = 'white'; // Here I am using @HostBinding('style.color')
+      this.elementRef.nativeElement.style.color = 'white';
+      this.bgColor = this.highlightColor; // Here I am using @HostBinding('style.color')
       // Which can be used only in this module in TS and it is bind to some property, in this
       // case to style.color
   }
 
   @HostListener('mouseleave') mouseLeave(eventData: Event) {
-      this.elementRef.nativeElement.style.backgroundColor = 'lightgreen';
+      this.elementRef.nativeElement.style.color = 'black'; //moze i ovako
+      this.bgColor = this.defaultColor; // ili ovako
   }
 
   /*

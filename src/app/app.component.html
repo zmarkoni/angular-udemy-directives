@@ -32,7 +32,11 @@
 
       <div appBasicHighlight>Style me with -> Basic Highlight Directive</div>
       <hr>
-      <div appBetterHighlight>Style me with -> Better Highlight Directive</div>
+      <div appBetterHighlight
+           [defaultColor]="'green'"
+           [highlightColor]="'red'"
+           >
+        Style me with -> Better Highlight Directive</div>
     </div>
   </div>
 </div>
